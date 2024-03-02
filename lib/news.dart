@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/screens/login_screen.dart';
 import 'package:news_app/screens/register_screen.dart';
 import 'package:news_app/screens/welcome_screen.dart';
 
@@ -25,7 +26,7 @@ class _NewsState extends State<News> {
               ],
             ),
           ),
-          child: const RegisterPage(),
+          child: const WelcomePage(),
         ),
       ),
     );
