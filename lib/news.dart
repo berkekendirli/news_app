@@ -19,23 +19,7 @@ class _NewsState extends State<News> {
           cursorColor: Color.fromARGB(255, 70, 71, 77),
         ),
       ),
-      home: Scaffold(
-        body: SafeArea(
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 255, 255, 255),
-                  Color.fromARGB(255, 151, 182, 243),
-                ],
-              ),
-            ),
-            child: const WelcomePage(),
-          ),
-        ),
-      ),
+      home: const WelcomePage(),
     );
   }
 }
