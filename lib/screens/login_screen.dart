@@ -2,97 +2,140 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/screens/register_screen.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool _isPasswordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(25),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Sign In',
-                  style: GoogleFonts.lobster(
-                    color: Colors.black,
-                    fontSize: 35,
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(255, 151, 182, 243),
+              ],
+            ),
+          ),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Sign In',
+                    style: GoogleFonts.lobster(
+                      color: Colors.black,
+                      fontSize: 35,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: GoogleFonts.overpass(fontSize: 16),
-                    floatingLabelStyle: const TextStyle(color: Colors.black),
-                    border: const OutlineInputBorder(),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: GoogleFonts.overpass(fontSize: 16),
+                      floatingLabelStyle: const TextStyle(color: Colors.black),
+                      border: const OutlineInputBorder(),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      prefixIcon: const Icon(Icons.email),
                     ),
                   ),
-                  cursorColor: const Color.fromARGB(255, 109, 107, 107),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: GoogleFonts.overpass(fontSize: 16),
-                    floatingLabelStyle: const TextStyle(color: Colors.black),
-                    border: const OutlineInputBorder(),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      labelStyle: GoogleFonts.overpass(fontSize: 16),
+                      floatingLabelStyle:
+                          const TextStyle(color: Colors.black),
+                      border: const OutlineInputBorder(),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      prefixIcon: const Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(_isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
+                      ),
                     ),
+                    obscureText: !_isPasswordVisible,
+                    cursorColor: const Color.fromARGB(255, 109, 107, 107),
                   ),
-                  obscureText: true,
-                  cursorColor: const Color.fromARGB(255, 109, 107, 107),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  width: 110,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    child: Center(
+                  const SizedBox(
+                    height: 0,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
                       child: Text(
-                        'Sign In',
-                        style: GoogleFonts.overpass(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: const Color.fromARGB(255, 206, 222, 255),
+                        'Forgot Password?',
+                        style: GoogleFonts.lato(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 110,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Sign In',
+                          style: GoogleFonts.overpass(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: const Color.fromARGB(255, 206, 222, 255),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const RegisterPage(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'Don\'t have an account? Sign Up',
-                    style: GoogleFonts.lato(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
-                  ),
-                )
-              ],
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegisterPage(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Don\'t have an account? Sign Up',
+                      style: GoogleFonts.lato(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

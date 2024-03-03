@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/screens/login_screen.dart';
-import 'package:news_app/screens/register_screen.dart';
 import 'package:news_app/screens/welcome_screen.dart';
 
 class News extends StatefulWidget {
@@ -14,19 +12,28 @@ class _NewsState extends State<News> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionColor: Color.fromARGB(255, 169, 184, 194),
+          selectionHandleColor: Color.fromARGB(255, 70, 71, 77),
+          cursorColor: Color.fromARGB(255, 70, 71, 77),
+        ),
+      ),
       home: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 206, 222, 255),
-              ],
+        body: SafeArea(
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(255, 151, 182, 243),
+                ],
+              ),
             ),
+            child: const WelcomePage(),
           ),
-          child: const WelcomePage(),
         ),
       ),
     );
