@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/methods/gradient_design.dart';
 import 'package:news_app/screens/news_screen.dart';
 import 'package:news_app/screens/register_screen.dart';
 
@@ -24,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: _email, password: _password);
       // print('User Logged In: ${userCredential.user!.email}');
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const NewsScreen(),
@@ -40,16 +41,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 151, 182, 243),
-              ],
-            ),
-          ),
+          decoration: gradientBackground(),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(25),
@@ -75,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         labelText: 'Email',
                         labelStyle: GoogleFonts.overpass(fontSize: 16),
-                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle:
+                            const TextStyle(color: Colors.black),
                         border: const OutlineInputBorder(),
                         focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black),
@@ -83,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                         prefixIcon: const Icon(Icons.email),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty){
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your email';
                         }
                         return null;
@@ -101,7 +94,8 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         labelText: 'Password',
                         labelStyle: GoogleFonts.overpass(fontSize: 16),
-                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle:
+                            const TextStyle(color: Colors.black),
                         border: const OutlineInputBorder(),
                         focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black),
@@ -119,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty){
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your password';
                         }
                         return null;
@@ -172,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const RegisterPage(),

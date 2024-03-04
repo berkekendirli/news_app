@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/methods/gradient_design.dart';
 import 'package:news_app/screens/login_screen.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: _email, password: _password);
       // print('User Registered: ${userCredential.user!.email}');
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const LoginPage(),
@@ -41,16 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 151, 182, 243),
-              ],
-            ),
-          ),
+          decoration: gradientBackground(),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(25),
@@ -122,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty){
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your password';
                         }
                         return null;

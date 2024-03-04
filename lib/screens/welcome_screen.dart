@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/screens/login_screen.dart';
 import 'package:news_app/screens/register_screen.dart';
+import 'package:news_app/methods/gradient_design.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -11,16 +12,7 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 151, 182, 243),
-              ],
-            ),
-          ),
+          decoration: gradientBackground(),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
