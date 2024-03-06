@@ -21,12 +21,10 @@ class _NewsScreenState extends State<NewsScreen> {
       onWillPop: () async {
         final difference = DateTime.now().difference(timeBackPressed);
         final isExitWarning = difference >= const Duration(seconds: 2);
-        timeBackPressed = DateTime.now();
 
         if (isExitWarning) {
-          final message = 'Press back again to exit';
-          Fluttertoast.showToast(msg: message, fontSize: 18);
-
+          Fluttertoast.showToast(msg: 'Press back again to exit', fontSize: 18);
+          timeBackPressed = DateTime.now();
           return false;
         } else {
           Fluttertoast.cancel();
