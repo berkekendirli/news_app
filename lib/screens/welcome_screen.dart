@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/screens/login_screen.dart';
 import 'package:news_app/screens/register_screen.dart';
 import 'package:news_app/methods/gradient_design.dart';
-import 'package:news_app/screens/news_screen.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});

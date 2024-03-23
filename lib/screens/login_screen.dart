@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/methods/gradient_design.dart';
 import 'package:news_app/methods/square_tile.dart';
 import 'package:news_app/screens/forgotpw_screen.dart';
-import 'package:news_app/screens/news_screen.dart';
+import 'package:news_app/screens/main_screen.dart';
 import 'package:news_app/screens/register_screen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: _email, password: _password);
-      print('User Logged In: ${userCredential.user!.email}');
+      // print('User Logged In: ${userCredential.user!.email}');
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(

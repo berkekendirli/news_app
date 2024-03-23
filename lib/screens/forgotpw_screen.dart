@@ -12,6 +12,8 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final _emailController = TextEditingController();
+  
+  
   @override
   void dispose() {
     _emailController.dispose();
@@ -24,7 +26,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         email: _emailController.text.trim(),
       );
     } on FirebaseAuthException catch (error) {
-      print('Password reset failed: $error');
+      // print('Password reset failed: $error');
     }
   }
 
