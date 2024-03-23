@@ -184,29 +184,26 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(
                         height: 25,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _handleSignUp();
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _handleSignUp();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Center(
-                            child: Text(
-                              'Sign Up',
-                              style: GoogleFonts.overpass(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.grey[200],
-                              ),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Sign Up',
+                            style: GoogleFonts.overpass(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.grey[200],
                             ),
                           ),
                         ),

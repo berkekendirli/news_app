@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: _email, password: _password);
-      // print('User Logged In: ${userCredential.user!.email}');
+      print('User Logged In: ${userCredential.user!.email}');
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -160,29 +160,26 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(
                         height: 5,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _handleLogin();
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _handleLogin();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Center(
-                            child: Text(
-                              'Sign In',
-                              style: GoogleFonts.overpass(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.grey[200],
-                              ),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Sign In',
+                            style: GoogleFonts.overpass(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.grey[200],
                             ),
                           ),
                         ),

@@ -11,26 +11,20 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  final TextEditingController _emailController = TextEditingController();
+  final _emailController = TextEditingController();
   @override
   void dispose() {
     _emailController.dispose();
     super.dispose();
   }
 
-  Future passwordReset() async {
+  void passwordReset() async {
     try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: _emailController.text.trim());
-    } on FirebaseAuthException catch (e) {
-      print(e);
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text(e.message.toString()),
-            );
-          });
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: _emailController.text.trim(),
+      );
+    } on FirebaseAuthException catch (error) {
+      print('Password reset failed: $error');
     }
   }
 
@@ -48,7 +42,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Enter your email and we will sent you a password reset link!',
+                      'Enter your email and we will send you a password reset link!',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.lato(
                         color: Colors.black,

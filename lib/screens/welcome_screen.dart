@@ -40,9 +40,12 @@ class WelcomePage extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      foregroundColor: Colors.white,
                       backgroundColor: const Color.fromARGB(255, 44, 44, 44),
+                      foregroundColor: Colors.white,
                     ),
                     child: SizedBox(
                       width: 150,
@@ -69,10 +72,12 @@ class WelcomePage extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                    ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black),
                     child: SizedBox(
                       width: 150,
                       height: 50,
@@ -92,9 +97,12 @@ class WelcomePage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       backgroundColor: const Color.fromARGB(255, 163, 60, 60),
+                      foregroundColor: Colors.white,
                     ),
                     child: SizedBox(
                       width: 150,
