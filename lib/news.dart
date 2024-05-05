@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/screens/welcome_screen.dart';
+import 'package:news_app/screens/auth_page.dart';
 
 class News extends StatefulWidget {
   const News({super.key});
@@ -20,7 +20,7 @@ class _NewsState extends State<News> {
           cursorColor: Color.fromARGB(255, 70, 71, 77),
         ),
       ),
-      home: const WelcomePage(),
+      home: const AuthPage(),
     );
   }
 }

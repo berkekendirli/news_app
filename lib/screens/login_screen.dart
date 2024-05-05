@@ -15,17 +15,37 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isPasswordVisible = false;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   String _email = "";
   String _password = "";
-  void _handleLogin() async {
+  String _errorMessage = "";
+
+  void handleLogin() async {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      return;
+    }
+
+    setState(() {
+      _errorMessage = "";
+    });
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(
+            color: Color.fromARGB(255, 255, 58, 68),
+          ),
+        );
+      },
+    );
+
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-          email: _email, password: _password);
-      // print('User Logged In: ${userCredential.user!.email}');
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      Navigator.pop(context);
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -33,8 +53,43 @@ class _LoginPageState extends State<LoginPage> {
           ),
           (route) => false);
     } catch (e) {
-      // print('Error During Logged In: $e');
+      Navigator.pop(context); // Dismiss the loading indicator
+      setState(() {
+        _errorMessage = 'Wrong email or password';
+      });
     }
+    emailController.clear();
+    passwordController.clear();
+  }
+
+  void showErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            message,
+            style: GoogleFonts.nunito(
+              color: Colors.black,
+              fontSize: 24,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'OK',
+                style: GoogleFonts.nunito(
+                    color: const Color.fromARGB(255, 0, 128, 255),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -64,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 25,
                       ),
                       TextFormField(
-                        controller: _emailController,
+                        controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'Email',
@@ -97,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 10),
                       TextFormField(
                         obscureText: !_isPasswordVisible,
-                        controller: _passController,
+                        controller: passwordController,
                         decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: GoogleFonts.nunito(fontSize: 16),
@@ -139,6 +194,18 @@ class _LoginPageState extends State<LoginPage> {
                           });
                         },
                       ),
+                      if (_errorMessage.isNotEmpty || _errorMessage != '')
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2.0),
+                          child: Text(
+                            _errorMessage,
+                            style: GoogleFonts.nunito(
+                              color: const Color.fromARGB(255, 255, 58, 68),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -182,9 +249,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _handleLogin();
-                            }
+                            handleLogin();
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 2,

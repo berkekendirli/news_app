@@ -7,9 +7,8 @@ class Search {
   List<SearchModel> search = [];
 
   Future<void> getSearchNews(String query) async {
-    String apiKey = newsApiKey;
     String url =
-        "http://newsapi.org/v2/everything?q=$query&language=en&apiKey=$apiKey";
+        "http://newsapi.org/v2/everything?q=$query&language=en&apiKey=$newsApiKey";
     var response = await http.get(Uri.parse(url));
     var jsonData = jsonDecode(response.body);
 

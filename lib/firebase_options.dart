@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -66,15 +63,27 @@ class DefaultFirebaseOptions {
     messagingSenderId: '229876668324',
     projectId: 'newsapp-bc6ee',
     storageBucket: 'newsapp-bc6ee.appspot.com',
+    iosClientId: '229876668324-08j1gs6vlesos8pcf3jmaig0up8aik5i.apps.googleusercontent.com',
     iosBundleId: 'com.example.newsApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAC7DS-bsmU8sdatCWUKMInXTn0p1q8tTQ',
-    appId: '1:229876668324:ios:065cad7cd3191dc05c5331',
+    appId: '1:229876668324:ios:bee424808871fa245c5331',
     messagingSenderId: '229876668324',
     projectId: 'newsapp-bc6ee',
     storageBucket: 'newsapp-bc6ee.appspot.com',
-    iosBundleId: 'com.example.newsApp.RunnerTests',
+    iosClientId: '229876668324-08j1gs6vlesos8pcf3jmaig0up8aik5i.apps.googleusercontent.com',
+    iosBundleId: 'com.example.newsApp',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAJllDrABP3ZDH4WDmuiSHNAbHBkZdnp_0',
+    appId: '1:229876668324:web:e349567ba3ecbd635c5331',
+    messagingSenderId: '229876668324',
+    projectId: 'newsapp-bc6ee',
+    authDomain: 'newsapp-bc6ee.firebaseapp.com',
+    storageBucket: 'newsapp-bc6ee.appspot.com',
+  );
+
 }

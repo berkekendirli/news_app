@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/methods/square_tile.dart';
 import 'package:news_app/screens/login_screen.dart';
+import 'package:news_app/screens/main_screen.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -14,28 +15,53 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passController = TextEditingController();
-  final TextEditingController _confirmPassController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
   String _email = "";
   String _password = "";
   String _confirmPassword = "";
+  String _errorMessage = "";
 
-  void _handleSignUp() async {
+  void signUserUp() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(
+            color: Color.fromARGB(255, 255, 58, 68),
+          ),
+        );
+      },
+    );
+
     try {
-      UserCredential userCredential = await _auth
-          .createUserWithEmailAndPassword(email: _email, password: _password);
-      // print('User Registered: ${userCredential.user!.email}');
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-        ),
-      );
-    } catch (e) {
-      // print('Error During Registration: $e');
+      if (passController.text == confirmPassController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text, password: passController.text);
+        Navigator.pop(context);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NewsScreen(),
+            ),
+            (route) => false);
+      } else {
+        await Future.delayed(const Duration(milliseconds: 500));
+        setState(() {
+          _errorMessage = "Passwords don't match";
+        });
+        Navigator.pop(context);
+      }
+      // Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == 'email-already-in-use') {
+        setState(() {
+          _errorMessage = 'Email already in use!';
+        });
+      }
     }
   }
 
@@ -66,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 25,
                       ),
                       TextFormField(
-                        controller: _emailController,
+                        controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'Email',
@@ -99,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(height: 10),
                       TextFormField(
                         obscureText: !_isPasswordVisible,
-                        controller: _passController,
+                        controller: passController,
                         decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: GoogleFonts.nunito(fontSize: 16),
@@ -146,7 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       TextFormField(
                         obscureText: !_isConfirmPasswordVisible,
-                        controller: _confirmPassController,
+                        controller: confirmPassController,
                         decoration: InputDecoration(
                           labelText: 'Confirm Password',
                           labelStyle: GoogleFonts.nunito(
@@ -179,21 +205,19 @@ class _RegisterPageState extends State<RegisterPage> {
                             },
                           ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please confirm your password';
-                          }
-                          if (value != _password) {
-                            return 'Passwords doesn\'t match';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            _confirmPassword = value;
-                          });
-                        },
                       ),
+                      if (_errorMessage.isNotEmpty || _errorMessage != '')
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2.0),
+                          child: Text(
+                            _errorMessage,
+                            style: GoogleFonts.nunito(
+                              color: const Color.fromARGB(255, 255, 58, 68),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
                       const SizedBox(
                         height: 25,
                       ),
@@ -212,7 +236,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              _handleSignUp();
+                              signUserUp();
                             }
                           },
                           style: ElevatedButton.styleFrom(

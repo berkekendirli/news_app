@@ -223,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -244,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.w600),
                                     ),
                                     const SizedBox(
-                                      width: 16,
+                                      width: 8,
                                     ),
                                     const Icon(
                                       Icons.arrow_forward,
