@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/screens/login_screen.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -10,21 +11,46 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  final _emailController = TextEditingController();
-
+  final emailController = TextEditingController();
+  String _errorMessage = "";
   @override
   void dispose() {
-    _emailController.dispose();
+    emailController.dispose();
     super.dispose();
   }
 
   void passwordReset() async {
+    if (emailController.text.isEmpty) {
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(
+            color: Color.fromARGB(255, 255, 58, 68),
+          ),
+        );
+      },
+    );
+
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(
-        email: _emailController.text.trim(),
+        email: emailController.text,
       );
+      Navigator.pop(context);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginPage(),
+          ));
     } on FirebaseAuthException catch (error) {
       // print('Password reset failed: $error');
+      Navigator.pop(context);
+      setState(() {
+        _errorMessage = 'Please enter a valid email';
+      });
     }
   }
 
@@ -54,7 +80,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       height: 25,
                     ),
                     TextFormField(
-                      controller: _emailController,
+                      controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'Email',
@@ -111,6 +137,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         ),
                       ),
                     ),
+                    if (_errorMessage.isNotEmpty || _errorMessage != '')
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2.0),
+                        child: Text(
+                          _errorMessage,
+                          style: GoogleFonts.nunito(
+                            color: const Color.fromARGB(255, 255, 58, 68),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
