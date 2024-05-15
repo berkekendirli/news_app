@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/methods/popup_menu_items.dart';
 import 'package:news_app/screens/article_view.dart';
+import 'package:popover/popover.dart';
 
 class BlogTile extends StatelessWidget {
   final String imageUrl, title, sourceName, url;
@@ -15,6 +17,14 @@ class BlogTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onLongPress: () => showPopover(
+        context: context,
+        bodyBuilder: (context) => PopUpItems(
+          newsUrl: url,
+        ),
+        width: 225,
+        backgroundColor: Colors.white,
+      ),
       onTap: () {
         Navigator.push(
           context,

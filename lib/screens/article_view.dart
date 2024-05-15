@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/methods/articlepop_menu.dart';
+import 'package:news_app/methods/popup_menu_items.dart';
+import 'package:popover/popover.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticleView extends StatefulWidget {
@@ -39,6 +42,23 @@ class _ArticleViewState extends State<ArticleView> {
             ),
           ],
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: GestureDetector(
+              onTap: () {
+                showPopover(
+                  height: 200,
+                  width: 100,
+                  context: context,
+                  bodyBuilder: (context) =>
+                      ArticlePopUp(newsUrl: widget.blogUrl),
+                );
+              },
+              child: const Icon(Icons.more_vert),
+            ),
+          ),
+        ],
         centerTitle: true,
         elevation: 1,
       ),
