@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news_app/methods/articlepop_menu.dart';
-import 'package:news_app/methods/popup_menu_items.dart';
-import 'package:popover/popover.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticleView extends StatefulWidget {
@@ -42,23 +42,6 @@ class _ArticleViewState extends State<ArticleView> {
             ),
           ],
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: GestureDetector(
-              onTap: () {
-                showPopover(
-                  height: 200,
-                  width: 100,
-                  context: context,
-                  bodyBuilder: (context) =>
-                      ArticlePopUp(newsUrl: widget.blogUrl),
-                );
-              },
-              child: const Icon(Icons.more_vert),
-            ),
-          ),
-        ],
         centerTitle: true,
         elevation: 1,
       ),
@@ -68,6 +51,48 @@ class _ArticleViewState extends State<ArticleView> {
             initialUrl: widget.blogUrl,
             javascriptMode: JavascriptMode.unrestricted,
           ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () {
+                Clipboard.setData(ClipboardData(text: widget.blogUrl));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Link copied to clipboard')),
+                );
+              },
+              icon: const Icon(Icons.link),
+            ),
+            IconButton(
+              onPressed: () async {
+                var url = Uri.parse(widget.blogUrl);
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url, mode: LaunchMode.externalApplication);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Could not launch URL'),
+                    ),
+                  );
+                }
+              },
+              icon: const Icon(Icons.travel_explore),
+            ),
+            IconButton(
+              onPressed: () {
+                Share.share(widget.blogUrl);
+              },
+              icon: const Icon(Icons.share),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.bookmark),
+            ),
+          ],
         ),
       ),
     );
