@@ -34,7 +34,7 @@ class WelcomePage extends StatelessWidget {
                     const SizedBox(height: 35),
                     Text(
                       'Welcome to the home of news!',
-                      style: GoogleFonts.playfairDisplay(
+                      style: GoogleFonts.ptSerif(
                           color: const Color.fromARGB(255, 0, 0, 0),
                           fontSize: 33,
                           fontWeight: FontWeight.bold),

@@ -21,7 +21,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
           children: [
             Text(
               'Notifica',
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.ptSerif(
                   color: Colors.black, fontWeight: FontWeight.w600),
             ),
             const SizedBox(
@@ -29,7 +29,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
             ),
             Text(
               'tions',
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.ptSerif(
                   color: const Color.fromARGB(255, 255, 58, 68),
                   fontWeight: FontWeight.w800),
             ),

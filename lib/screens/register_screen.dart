@@ -82,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
                       Text(
                         'Sign Up',
-                        style: GoogleFonts.playfairDisplay(
+                        style: GoogleFonts.ptSerif(
                             color: Colors.black,
                             fontSize: 35,
                             fontWeight: FontWeight.bold),

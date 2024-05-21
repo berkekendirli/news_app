@@ -43,7 +43,7 @@ class _BreakingPageState extends State<BreakingPage> {
             children: [
               Text(
                 'Breaking',
-                style: GoogleFonts.playfairDisplay(
+                style: GoogleFonts.ptSerif(
                     color: Colors.black,
                     fontSize: 22,
                     fontWeight: FontWeight.w600),
@@ -53,7 +53,7 @@ class _BreakingPageState extends State<BreakingPage> {
               ),
               Text(
                 'News',
-                style: GoogleFonts.playfairDisplay(
+                style: GoogleFonts.ptSerif(
                     color: const Color.fromARGB(255, 255, 58, 68),
                     fontSize: 22,
                     fontWeight: FontWeight.w800),

@@ -25,7 +25,7 @@ class _ArticleViewState extends State<ArticleView> {
           children: [
             Text(
               'Beykoz',
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.ptSerif(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                   fontSize: 22),
@@ -35,7 +35,7 @@ class _ArticleViewState extends State<ArticleView> {
             ),
             Text(
               'News',
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.ptSerif(
                   color: const Color.fromARGB(255, 255, 58, 68),
                   fontWeight: FontWeight.w800,
                   fontSize: 22),

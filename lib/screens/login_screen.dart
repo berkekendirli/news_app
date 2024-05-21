@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         'Sign In',
-                        style: GoogleFonts.playfairDisplay(
+                        style: GoogleFonts.ptSerif(
                             color: Colors.black,
                             fontSize: 35,
                             fontWeight: FontWeight.bold),

@@ -160,51 +160,6 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, animation,
-                                              secondaryAnimation) =>
-                                          const NotificationsPage(),
-                                      transitionsBuilder: (context, animation,
-                                          secondaryAnimation, child) {
-                                        var begin = const Offset(0, -1.0);
-                                        var end = Offset.zero;
-                                        var curve = Curves.ease;
-
-                                        var tween = Tween(
-                                                begin: begin, end: end)
-                                            .chain(CurveTween(curve: curve));
-                                        return SlideTransition(
-                                          position: animation.drive(tween),
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        Color.fromARGB(255, 255, 58, 68),
-                                        Color.fromARGB(255, 255, 128, 134)
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: const Center(
-                                    child: Icon(Icons.notifications_none),
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -218,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 'Breaking News',
-                                style: GoogleFonts.playfairDisplay(
+                                style: GoogleFonts.ptSerif(
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
@@ -361,6 +316,8 @@ class _HomePageState extends State<HomePage> {
         return buildImage(res!, index, res1!, res2!);
       },
       options: CarouselOptions(
+        autoPlayInterval: const Duration(seconds: 8),
+        autoPlayAnimationDuration: const Duration(milliseconds: 1650),
         autoPlay: true,
         height: 240,
         enlargeCenterPage: true,
@@ -406,7 +363,7 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     name,
                     maxLines: 2,
-                    style: GoogleFonts.playfairDisplay(
+                    style: GoogleFonts.ptSerif(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
