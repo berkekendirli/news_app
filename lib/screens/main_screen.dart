@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_app/screens/bookmarks_page.dart';
+import 'package:news_app/screens/currency_page.dart';
 import 'package:news_app/screens/home_news.dart';
 import 'package:news_app/screens/profile_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -28,10 +29,11 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     String? _email = _auth.currentUser!.email;
 
-    List<Widget> pages = const [
-      HomePage(),
-      BookmarksPage(),
-      ProfilePage(),
+    List<Widget> pages = [
+      const HomePage(),
+      CurrencyPage(),
+      const BookmarksPage(),
+      const ProfilePage(),
     ];
 
     return WillPopScope(
@@ -76,6 +78,10 @@ class _NewsScreenState extends State<NewsScreen> {
                 GButton(
                   icon: Icons.home,
                   text: 'Home',
+                ),
+                GButton(
+                  icon: Icons.attach_money,
+                  text: 'Currency',
                 ),
                 GButton(
                   icon: Icons.bookmark,
