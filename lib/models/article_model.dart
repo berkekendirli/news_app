@@ -7,6 +7,9 @@ class ArticleModel {
   String? content;
   String? source;
   String? id;
+  String? imageFire;
+  String? titleFire;
+  String? sourceFire;
 
   ArticleModel(
       {this.author,
@@ -17,5 +20,8 @@ class ArticleModel {
       this.urlToImage,
       this.source}) {
     id = url;
+    imageFire = urlToImage;
+    titleFire = title;
+    sourceFire = source;
   }
 }

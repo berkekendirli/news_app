@@ -16,9 +16,9 @@ class Search {
       jsonData["articles"].forEach((element) {
         if (element["title"] != "[Removed]") {
           String description = element["description"] ??
-              "No description available"; // Provide a default value if description is null
+              ""; // Provide a default value if description is null
           String imageUrl = element["urlToImage"] ??
-              "https://i.postimg.cc/XqwMZy2f/noimage.jpg"; // Use a default image URL if urlToImage is null
+              "https://i.ibb.co/q7bYPKN/placeholder-image21.png"; // Use a default image URL if urlToImage is null
           SearchModel searchModel = SearchModel(
             title: element["title"],
             description: description,

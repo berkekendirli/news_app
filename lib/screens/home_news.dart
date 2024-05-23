@@ -8,7 +8,6 @@ import 'package:news_app/models/slider_model.dart';
 import 'package:news_app/screens/all_breaking.dart';
 import 'package:news_app/screens/article_view.dart';
 import 'package:news_app/screens/category_page.dart';
-import 'package:news_app/screens/notifications_page.dart';
 import 'package:news_app/screens/search_page.dart';
 import 'package:news_app/services/category_data.dart';
 import 'package:news_app/services/slider_data.dart';
@@ -221,6 +220,7 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: const EdgeInsets.only(
                             left: 15,
+                            right: 7,
                           ),
                           child: SizedBox(
                             height: 32,
@@ -268,7 +268,7 @@ class _HomePageState extends State<HomePage> {
       child: AnimatedContainer(
         curve: Curves.easeInCubic,
         duration: const Duration(milliseconds: 200),
-        margin: const EdgeInsets.symmetric(horizontal: 4),
+        margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
           color: isSelected ? null : Colors.white,
@@ -313,7 +313,9 @@ class _HomePageState extends State<HomePage> {
         String? res = sliders[index].urlToImage;
         String? res1 = sliders[index].title;
         String? res2 = sliders[index].url;
-        return buildImage(res!, index, res1!, res2!);
+        String? res3 = sliders[index].source;
+        String? res4 = sliders[index].description;
+        return buildImage(res!, index, res1!, res2!, res3!, res4!);
       },
       options: CarouselOptions(
         autoPlayInterval: const Duration(seconds: 8),
@@ -326,13 +328,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildImage(String image, int index, String name, String url) =>
+  Widget buildImage(String image, int index, String name, String url,
+          String source, String desc) =>
       GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ArticleView(
+                urlToImage: image,
+                title: name,
+                source: source,
                 blogUrl: url,
               ),
             ),
@@ -354,23 +360,54 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 height: double.infinity,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(94, 0, 0, 0),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Center(
-                  child: Text(
-                    name,
-                    maxLines: 2,
-                    style: GoogleFonts.ptSerif(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Center(
+                        child: Text(
+                          name,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.ptSerif(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Text(
+                        desc,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.nunito(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w100,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Text(
+                          source,
+                          style: GoogleFonts.nunito(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
