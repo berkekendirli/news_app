@@ -6,6 +6,7 @@ class ArticleModel {
   String? urlToImage;
   String? content;
   String? source;
+  String? id;
 
   ArticleModel(
       {this.author,
@@ -14,5 +15,7 @@ class ArticleModel {
       this.title,
       this.url,
       this.urlToImage,
-      this.source});
+      this.source}) {
+    id = url;
+  }
 }

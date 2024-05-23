@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,13 +9,23 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticleView extends StatefulWidget {
   final String blogUrl;
-  const ArticleView({super.key, required this.blogUrl});
+  const ArticleView({Key? key, required this.blogUrl}) : super(key: key);
 
   @override
   State<ArticleView> createState() => _ArticleViewState();
 }
 
 class _ArticleViewState extends State<ArticleView> {
+  // Функция для добавления новости в закладки
+  void addToBookmarks(String newsId) {
+    // Вставьте здесь вашу логику для добавления в закладки
+    // Пример: добавление в коллекцию Firebase
+    FirebaseFirestore.instance.collection('bookmarks').add({
+      'userId': FirebaseAuth.instance.currentUser!.uid,
+      'newsId': newsId,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +38,10 @@ class _ArticleViewState extends State<ArticleView> {
             Text(
               'Beykoz',
               style: GoogleFonts.ptSerif(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 22),
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+                fontSize: 22,
+              ),
             ),
             const SizedBox(
               width: 1,
@@ -36,9 +49,10 @@ class _ArticleViewState extends State<ArticleView> {
             Text(
               'News',
               style: GoogleFonts.ptSerif(
-                  color: const Color.fromARGB(255, 255, 58, 68),
-                  fontWeight: FontWeight.w800,
-                  fontSize: 22),
+                color: const Color.fromARGB(255, 255, 58, 68),
+                fontWeight: FontWeight.w800,
+                fontSize: 22,
+              ),
             ),
           ],
         ),
@@ -89,7 +103,10 @@ class _ArticleViewState extends State<ArticleView> {
               icon: const Icon(Icons.share),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                addToBookmarks(
+                    widget.blogUrl); // Используем URL в качестве идентификатора
+              },
               icon: const Icon(Icons.bookmark),
             ),
           ],

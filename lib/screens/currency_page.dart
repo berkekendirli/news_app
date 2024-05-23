@@ -86,7 +86,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
                 return ListTile(
                   tileColor: Colors.white,
                   leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(16),
                     child: SvgPicture.asset(
                       'assets/flags/$countryCode.svg',
                       width: 32,

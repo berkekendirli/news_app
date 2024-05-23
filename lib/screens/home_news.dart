@@ -332,7 +332,9 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ArticleView(blogUrl: url),
+              builder: (context) => ArticleView(
+                blogUrl: url,
+              ),
             ),
           );
         },
