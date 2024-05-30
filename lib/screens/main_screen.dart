@@ -61,7 +61,8 @@ class _NewsScreenState extends State<NewsScreen> {
           ),
         ),
         bottomNavigationBar: Material(
-          elevation: 4,
+          color: Colors.white,
+          elevation: 1,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: GNav(
@@ -76,19 +77,23 @@ class _NewsScreenState extends State<NewsScreen> {
               padding: const EdgeInsets.all(16),
               tabs: const [
                 GButton(
+                  backgroundColor: Colors.white,
                   icon: Icons.home,
                   text: 'Home',
                 ),
                 GButton(
+                  backgroundColor: Colors.white,
                   icon: Icons.attach_money,
                   text: 'Currency',
                 ),
                 GButton(
+                  backgroundColor: Colors.white,
                   icon: Icons.bookmark,
                   text: 'Bookmarks',
                   textSize: 15,
                 ),
                 GButton(
+                  backgroundColor: Colors.white,
                   icon: Icons.account_circle,
                   text: 'Profile',
                 ),
