@@ -7,7 +7,6 @@ class BookmarkedNews {
     required this.title,
     required this.url,
     required this.sourceName,
-    
     required this.userId,
   });
 

@@ -31,7 +31,7 @@ class _NewsScreenState extends State<NewsScreen> {
 
     List<Widget> pages = [
       const HomePage(),
-      CurrencyPage(),
+      const CurrencyPage(),
       const BookmarksPage(),
       const ProfilePage(),
     ];

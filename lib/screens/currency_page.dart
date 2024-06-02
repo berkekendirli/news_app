@@ -269,7 +269,9 @@ class _CurrencyPageState extends State<CurrencyPage> {
         elevation: 1,
         actions: [
           IconButton(
-            icon: Icon(Icons.filter_list, color: Colors.black),
+            icon: const Icon(
+              Icons.filter_list,
+            ),
             onPressed: () {
               _showFilterDialog(context);
             },

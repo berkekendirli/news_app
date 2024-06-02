@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news_app/methods/square_tile.dart';
 import 'package:news_app/screens/login_screen.dart';
 import 'package:news_app/screens/main_screen.dart';
+import 'package:news_app/screens/verify_mail.dart';
+import 'package:news_app/services/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -21,7 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController confirmPassController = TextEditingController();
   String _email = "";
   String _password = "";
-  String _confirmPassword = "";
+  final String _confirmPassword = "";
   String _errorMessage = "";
 
   void signUserUp() async {
@@ -44,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const NewsScreen(),
+              builder: (context) => const VerifyPage(),
             ),
             (route) => false);
       } else {
@@ -293,19 +294,28 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SquareTile(
-                            imagePath: 'assets/images/google.png',
+                      GestureDetector(
+                        onTap: () => AuthService().signInWithGoogle(context),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 255, 58, 68),
+                                  Color.fromARGB(255, 255, 128, 134),
+                                ],
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.topRight),
                           ),
-                          SizedBox(
-                            width: 10,
+                          height: 50,
+                          child: Center(
+                            child: Image.asset(
+                              'assets/images/Google_.png',
+                              height: 35,
+                            ),
                           ),
-                          SquareTile(
-                            imagePath: 'assets/images/facebook.png',
-                          ),
-                        ],
+                        ),
                       ),
                       const SizedBox(
                         height: 20,

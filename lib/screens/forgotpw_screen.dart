@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news_app/screens/login_screen.dart';
+
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -40,13 +40,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         email: emailController.text,
       );
       Navigator.pop(context);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginPage(),
-          ));
-    } on FirebaseAuthException catch (error) {
-      // print('Password reset failed: $error');
+      setState(() {
+        _errorMessage = 'Password reset link has been sent to your email.';
+      });
+    } on FirebaseAuthException {
       Navigator.pop(context);
       setState(() {
         _errorMessage = 'Please enter a valid email';

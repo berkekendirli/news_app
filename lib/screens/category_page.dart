@@ -55,20 +55,18 @@ class _CategoryNewsState extends State<CategoryNews> {
             ),
           ),
         )
-        : Container(
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              itemCount: articles.length,
-              itemBuilder: (context, index) {
-                return BlogTile(
-                  imageUrl: articles[index].urlToImage!,
-                  sourceName: articles[index].source!,
-                  title: articles[index].title!,
-                  url: articles[index].url!,
-                );
-              },
-            ),
-          );
+        : ListView.builder(
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          itemCount: articles.length,
+          itemBuilder: (context, index) {
+            return BlogTile(
+              imageUrl: articles[index].urlToImage!,
+              sourceName: articles[index].source!,
+              title: articles[index].title!,
+              url: articles[index].url!,
+            );
+          },
+        );
   }
 }

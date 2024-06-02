@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FocusNode _focusNode = FocusNode();
   String? selectedCategoryName;
   List<sliderModel> sliders = [];
   List<CategoryModel> categories = [];
@@ -82,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                                     alignment: Alignment.centerRight,
                                     children: [
                                       TextField(
+                                        focusNode: _focusNode,
                                         textInputAction: TextInputAction.search,
                                         controller: _searchController,
                                         onChanged: (value) {
@@ -110,50 +112,55 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         // textAlignVertical: TextAlignVertical.bottom,
                                         decoration: InputDecoration(
-                                          hintText: 'Search...',
-                                          hintStyle: const TextStyle(
-                                            color: Color.fromARGB(
-                                                146, 129, 129, 129),
-                                          ),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  vertical: 4, horizontal: 16),
-                                          border: OutlineInputBorder(
-                                            borderSide: const BorderSide(
+                                            hintText: 'Search...',
+                                            hintStyle: const TextStyle(
                                               color: Color.fromARGB(
-                                                  255, 240, 241, 250),
+                                                  146, 129, 129, 129),
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color: Color.fromARGB(255, 82, 82,
-                                                  82), // Change to your desired color
+                                            contentPadding:
+                                                const EdgeInsets.symmetric(
+                                                    vertical: 4,
+                                                    horizontal: 16),
+                                            border: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 240, 241, 250),
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          suffixIcon: _showClearIcon
-                                              ? GestureDetector(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      _searchController.clear();
-                                                      _showClearIcon = false;
-                                                    });
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.clear,
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Color.fromARGB(
+                                                    255,
+                                                    82,
+                                                    82,
+                                                    82), // Change to your desired color
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                            ),
+                                            suffixIcon: _showClearIcon
+                                                ? GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        _searchController
+                                                            .clear();
+                                                        _showClearIcon = false;
+                                                        _focusNode.unfocus();
+                                                      });
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.clear,
+                                                      color: Color.fromARGB(
+                                                          146, 129, 129, 129),
+                                                    ),
+                                                  )
+                                                : const Icon(
+                                                    Icons.search,
                                                     color: Color.fromARGB(
                                                         146, 129, 129, 129),
-                                                  ),
-                                                )
-                                              : const Icon(
-                                                  Icons.search,
-                                                  color: Color.fromARGB(
-                                                      146, 129, 129, 129),
-                                                ),
-                                        ),
+                                                  ),),
                                       ),
                                     ],
                                   ),
